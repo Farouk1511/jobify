@@ -2,4 +2,4 @@
 
 A mobile application to help track jobs application status
 
-![image](https://user-images.githubusercontent.com/47955096/193369886-54f46dd1-2573-4a03-8e70-5df56545ad1b.png)
+![image](https://user-images.githubusercontent.com/47955096/193370002-740671e1-45ee-4af1-b767-f6aed504f703.png)
