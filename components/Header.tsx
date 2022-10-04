@@ -2,7 +2,11 @@ import { Center, IconButton, Icon,Text } from "native-base";
 import { Ionicons } from "@expo/vector-icons";
 import React from "react";
 
-const Header = ():JSX.Element => {
+type Props = {
+  openModal: () => void
+}
+
+const Header = ({openModal}:Props):JSX.Element => {
 
     return (
         <Center
@@ -15,6 +19,7 @@ const Header = ():JSX.Element => {
           Jobify
         </Text>
         <IconButton
+        onPress={openModal}
           icon={
             <Icon
               as={<Ionicons name="add-circle-sharp" size={50} color="white" />}

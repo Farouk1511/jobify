@@ -1,12 +1,14 @@
 import { VStack } from "native-base";
-import React from "react";
+import React, { useState } from "react";
 import SearchBar from "../components/SearchBar";
 import Job from "../interface/job";
 import JobGrid from "../components/JobGrid";
 import Header from "../components/Header";
 import StatusBar from "../components/StatusBar";
+import JobModal from "../components/JobModal";
 
 const Main = (): JSX.Element => {
+  const [open,setOpen] = useState(false)
   const jobs: Job[] = [
     {
       name: "Facebook",
@@ -46,14 +48,25 @@ const Main = (): JSX.Element => {
     },
   ];
 
+ const openModal = () => {
+  setOpen(true)
+ }
+
+ const closeModal = () => {
+  setOpen(false)
+ }
   return (
-    <VStack margin={0} backgroundColor={"gray.900"} marginBottom={0} safeArea>
+    
+   <>
+     <VStack margin={0} backgroundColor={"gray.900"} marginBottom={0} safeArea>
       <StatusBar />
 
-      <Header />
+      <Header openModal={openModal} />
       <SearchBar />
       <JobGrid jobs={jobs} />
     </VStack>
+      <JobModal open={open} closeModal={closeModal} openModal={openModal} />
+   </>
   );
 };
 

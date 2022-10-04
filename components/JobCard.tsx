@@ -29,7 +29,7 @@ const COLORS:Colors = {
 const JobCard = ({job}:Props):JSX.Element => {
 
   const color = COLORS[job.status.split(" ")[0].toLowerCase() as keyof Colors]
-  let amz = `logo-${job.logo}`
+  let logo = `logo-${job.logo}`
     return (
         <Center
         flexDirection={"row"}
@@ -44,7 +44,7 @@ const JobCard = ({job}:Props):JSX.Element => {
       
         <Icon
         //@ts-ignore
-          as={<Ionicons name={amz} size={24} color="black" />}
+          as={<Ionicons name={logo} size={24} color="black" />}
           size={"6xl"}
         />
 
