@@ -3,13 +3,33 @@ import { Center, Icon, VStack ,Text} from "native-base";
 import { Ionicons } from "@expo/vector-icons";
 import { AntDesign } from "@expo/vector-icons";
 import Job from "../interface/job";
+import { Feather } from '@expo/vector-icons'; 
 
 type Props = {
     job:Job;
 }
+// https://stackoverflow.com/questions/57086672/element-implicitly-has-an-any-type-because-expression-of-type-string-cant-b
+
+interface Colors{
+  offer:string,
+  rejected:string,
+  applied:string,
+  phone:string,
+  interview:string,
+}
+
+const COLORS:Colors = {
+  offer:'tertiary.500',
+  rejected:'error.900',
+  applied:'#59C3C3',
+  phone:'blue.900',
+  interview:'dark.500',
+}
 
 const JobCard = ({job}:Props):JSX.Element => {
 
+  const color = COLORS[job.status.split(" ")[0].toLowerCase() as keyof Colors]
+  let amz = `logo-${job.logo}`
     return (
         <Center
         flexDirection={"row"}
@@ -19,10 +39,12 @@ const JobCard = ({job}:Props):JSX.Element => {
         marginRight={5}
         marginTop={5}
         padding={3}
-        borderColor={"green.400"}
+        borderColor={color}
       >
+      
         <Icon
-          as={<Ionicons name={'logo-amazon'} size={24} color="black" />}
+        //@ts-ignore
+          as={<Ionicons name={amz} size={24} color="black" />}
           size={"6xl"}
         />
 
@@ -33,7 +55,7 @@ const JobCard = ({job}:Props):JSX.Element => {
           <Text fontWeight={500} color={"white"}>
             {job.title}
           </Text>
-          <Text fontSize={"lg"} fontWeight={800} color={"green.400"}>
+          <Text fontSize={"lg"} fontWeight={800} color={color}>
            {job.status}
           </Text>
         </VStack>

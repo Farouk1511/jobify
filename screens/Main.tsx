@@ -47,7 +47,7 @@ const Main = (): JSX.Element => {
   ];
 
   return (
-    <VStack margin={0} backgroundColor={"dark.50"} marginBottom={0} safeArea>
+    <VStack margin={0} backgroundColor={"gray.900"} marginBottom={0} safeArea>
       <StatusBar />
 
       <Header />
