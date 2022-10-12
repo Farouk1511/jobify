@@ -2,19 +2,37 @@ import { Button, Input, Modal, ScrollView, Select, Text } from "native-base";
 import React, { useContext, useState } from "react";
 import ColorContext from "../Context/ColorContext";
 import Colors from "../interface/color";
+import Job from "../interface/job";
+
 
 type Props = {
   open: boolean;
-  openModal: () => void;
+  addJob: (values:Job) => void;
   closeModal: () => void;
 };
 
-const JobModal = ({ open, openModal, closeModal }: Props): JSX.Element => {
+const JobModal = ({ open, addJob, closeModal }: Props): JSX.Element => {
+  const [values, setValues] = useState<Job>({status:"applied"} as Job);
+
   const [status, setStatus] = useState("applied");
-  const colors = useContext(ColorContext)
+  const colors = useContext(ColorContext);
   const handleChange = (itemValue: string) => {
     setStatus(itemValue);
+    setValues((values) => {
+      return {...values,status:itemValue}
+    });
   };
+
+  const handleChanges = (name: string) => (text:string) => {
+    setValues({ ...values, [name]: text });
+  };
+
+  const handleAddJob = () => {
+    console.log(values)
+    addJob(values)
+  }
+
+ 
 
   return (
     <Modal isOpen={open} size={"full"} height={"100%"} onClose={closeModal}>
@@ -26,7 +44,9 @@ const JobModal = ({ open, openModal, closeModal }: Props): JSX.Element => {
       >
         <Modal.CloseButton />
         <Modal.Header backgroundColor={"dark.50"} color={"#fff"}>
-          <Text color={"#fff"} fontSize="2xl" fontWeight={"700"}>Add Job</Text>
+          <Text color={"#fff"} fontSize="2xl" fontWeight={"700"}>
+            Add Job
+          </Text>
         </Modal.Header>
         <Modal.Body>
           <ScrollView>
@@ -35,12 +55,14 @@ const JobModal = ({ open, openModal, closeModal }: Props): JSX.Element => {
               size={"2xl"}
               color={"#fff"}
               marginBottom={4}
+              onChangeText={handleChanges("name")}
             />
             <Input
               placeholder="Position"
               size={"2xl"}
               color={"#fff"}
               marginBottom={4}
+              onChangeText={handleChanges("title")}
             />
             <Select
               marginBottom={4}
@@ -67,7 +89,7 @@ const JobModal = ({ open, openModal, closeModal }: Props): JSX.Element => {
             />
           </ScrollView>
 
-          <Button size={"lg"} marginBottom={4}>
+          <Button size={"lg"} marginBottom={4} onPress={handleAddJob}>
             Add Job
           </Button>
           <Button size={"lg"} marginBottom={4} onPress={closeModal}>

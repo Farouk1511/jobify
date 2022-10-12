@@ -11,7 +11,7 @@ const StatusBar = ():JSX.Element => {
         zIndex={1}
         height={Constants.statusBarHeight}
       >
-        <Bar  style="light" />
+        <Bar style="light" />
       </View>
     )
 }

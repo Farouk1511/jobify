@@ -2,7 +2,11 @@ import { Center, Input, Icon } from "native-base";
 import React from "react";
 import { Ionicons } from "@expo/vector-icons";
 
-const SearchBar = ():JSX.Element => {
+type Props = {
+  handleSearch: (jobName:string) => Promise<void>
+}
+
+const SearchBar = ({handleSearch}:Props):JSX.Element => {
 
     return (
         <Center>
@@ -18,6 +22,8 @@ const SearchBar = ():JSX.Element => {
             />
           }
           paddingLeft={1}
+          onChangeText={handleSearch}
+          color="#fff"
         />
         {/* Search Bar */}
       </Center>
